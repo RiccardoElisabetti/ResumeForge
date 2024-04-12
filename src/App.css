@@ -1,0 +1,94 @@
+/* CSS reset */
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+	outline: 2px dashed black;
+}
+
+* {
+	margin: 0;
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+	display: block;
+	max-width: 100%;
+}
+
+input,
+button,
+textarea,
+select {
+	font: inherit;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	overflow-wrap: break-word;
+}
+
+/* Default settings */
+
+:root {
+	--clr-primary: #ffffff;
+	--clr-secondary: #97e89e;
+	--clr-tertiary: #3c31a5;
+
+	font-size: 62.5%;
+	--ff-primary: "Manrope";
+
+	--fs-primary: 2rem;
+	--fs-secondary: 1.25rem;
+	--fs-tertiary: 1.15rem;
+
+	font-family: var(--ff-primary);
+}
+
+#root {
+	display: flex;
+	flex-direction: column;
+    min-height: 100svh;
+}
+
+header,
+footer {
+	flex: 1;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.logo-wrapper{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+main {
+	flex: 8;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;   
+    gap: 10vw;
+}
+
+.hero{
+    font-size: var(--fs-primary);
+    width: 50%;
+}
+
+@media (max-width:600px){
+    .image{
+        display: none;
+    }
+}
+
