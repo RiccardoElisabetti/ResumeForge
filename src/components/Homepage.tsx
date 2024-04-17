@@ -1,6 +1,6 @@
 import GithubLogo from "./../assets/GithubLogo";
 import ResumeForgeLogo from "./../assets/ResumeForgeLogo";
-import GenericGuyImage from "./../assets/GenericGuy.jpg";
+import GenericGuyImage from "./../assets/genericGuy.jpg";
 import { Link } from "react-router-dom";
 
 export function Homepage() {
