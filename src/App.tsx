@@ -1,22 +1,26 @@
 import { Route, Routes } from "react-router-dom";
 import { Homepage } from "./components/Homepage";
-import { AppProvider } from "./components/State";
 import { PersonalInformations } from "./components/steps/PersonalInformations";
 import { EmploymentHistory } from "./components/steps/EmploymentHistory";
 import { Summary } from "./components/steps/Summary";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 
-
+const theme = createTheme({
+	typography: {
+		fontFamily: "Manrope, sans-serif",
+	},
+});
 
 function App() {
 	return (
-		<AppProvider>
+		<ThemeProvider theme={theme}>
 			<Routes>
 				<Route path="/" element={<Homepage />} />
 				<Route path="/form/" element={<PersonalInformations />} />
 				<Route path="/form/history" element={<EmploymentHistory />} />
 				<Route path="/form/summary" element={<Summary />} />
 			</Routes>
-		</AppProvider>
+		</ThemeProvider>
 	);
 }
 

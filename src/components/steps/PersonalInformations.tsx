@@ -1,36 +1,66 @@
 import { Link } from "react-router-dom";
+import { FormWrapper } from "../FormWrapper";
+import TextField from "@mui/material/TextField";
+import Grid from "@mui/material/Unstable_Grid2";
+import {Button } from "@mui/material";
+import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 
 export function PersonalInformations() {
 	return (
-		<fieldset style={{width: "30%"}}>
-			<legend>Dati Personali</legend>
-			<label htmlFor="name">Name:</label>
-			<input type="text" id="name" name="name" required />
-			<br/>
-			<label htmlFor="name">Cognome:</label>
-			<input type="text" id="name" name="name" required />
-			<br />
-			<label htmlFor="name">Indirizzo:</label>
-			<input type="text" id="name" name="name" required />
-			<br />
-			<label htmlFor="name">Codice postale:</label>
-			<input type="text" id="name" name="name" required />
-			<br />
-			<label htmlFor="name">Città/Capolougo:</label>
-			<input type="text" id="name" name="name" required />
-			<br />
-			<label htmlFor="name">Numero telefonico:</label>
-			<input type="text" id="name" name="name" required />
-			<br />
-			<label htmlFor="name">Cognome:</label>
-			<input type="text" id="name" name="name" required />
-			<br />
-			<label htmlFor="email">Email:</label>
-			<input type="email" id="email" name="email" required />
-			<br />
-			<button style={{display: "block"}}>
-				<Link to="/form/history">next</Link>
-			</button>
-		</fieldset>
+		<FormWrapper>
+			<Grid container rowSpacing={3} columnSpacing={2}>
+				<Grid md={6} xs={12}>
+					<TextField sx={{ width: "100%" }} label="Nome" variant="filled" />
+				</Grid>
+				<Grid md={6} xs={12}>
+					<TextField sx={{ width: "100%" }} label="Cognome" variant="filled" />
+				</Grid>
+				<Grid md={6} xs={12}>
+					<TextField
+						sx={{ width: "100%" }}
+						label="Indirizzo"
+						variant="filled"
+					/>
+				</Grid>
+				<Grid md={6} xs={12}>
+					<TextField
+						sx={{ width: "100%" }}
+						label="Codice postale"
+						variant="filled"
+					/>
+				</Grid>
+				<Grid md={6} xs={12}>
+					<TextField
+						sx={{ width: "100%" }}
+						label="Città/Capoluogo"
+						variant="filled"
+					/>
+				</Grid>
+				<Grid md={6} xs={12}>
+					<TextField
+						sx={{ width: "100%" }}
+						label="Numero telefonico"
+						variant="filled"
+					/>
+				</Grid>
+				<Grid xs={12}>
+					<TextField sx={{ width: "100%" }} label="Sito Web" variant="filled" />
+				</Grid>
+				<Grid xs={12}>
+					<TextField sx={{ width: "100%" }} label="Email" variant="filled" />
+				</Grid>
+				<Grid display={"flex"} justifyContent={"center"} xs={12}>
+					<Button
+						sx={{ width: "80%", bgcolor: "#5846FB", borderRadius: "2rem" }}
+						component={Link}
+						to="/form/history"
+						variant="contained"
+						endIcon={<ArrowForwardIcon />}
+					>
+						next
+					</Button>
+				</Grid>
+			</Grid>
+		</FormWrapper>
 	);
 }

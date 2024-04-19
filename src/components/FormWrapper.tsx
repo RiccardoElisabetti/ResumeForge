@@ -1,20 +1,28 @@
+import { Breakpoint, Container, SxProps } from "@mui/material";
 import { ReactNode } from "react";
 
 type FormWrapperProps = {
-	title: string;
 	children: ReactNode;
+	sx?: SxProps;
+	maxWidth?: Breakpoint;
 };
 
-export function FormWrapper({ title, children }: FormWrapperProps) {
+export function FormWrapper({
+	children,
+	sx,
+	maxWidth = "sm",
+}: FormWrapperProps) {
 	return (
-		<div>
-			<h2 >
-				{title}
-			</h2>
-			<div
-			>
-				{children}
-			</div>
-		</div>
+		<Container
+			maxWidth={maxWidth}
+			sx={{
+				padding: "2rem",
+				borderRadius: "4rem",
+				boxShadow: "-10px 11px 0px 4px #9593FA",
+				...sx,
+			}}
+		>
+			{children}
+		</Container>
 	);
 }
