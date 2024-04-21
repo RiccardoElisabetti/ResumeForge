@@ -1,8 +1,10 @@
 import { Link } from "react-router-dom";
+import { FormWrapper } from "../FormWrapper";
 
 
 export function Summary() {
 	return (
+
 		<fieldset>
 			<legend>Summary</legend>
 			<p>Here's a summary of your information:</p>

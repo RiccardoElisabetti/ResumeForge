@@ -1,8 +1,6 @@
-// state.js
-
 import { createContext, ReactNode, useContext, useState } from "react";
 
-export const AppStateContext = createContext({});
+export const FormStateContext = createContext({});
 
 type AppProviderProps = {
     children: ReactNode;
@@ -11,14 +9,14 @@ type AppProviderProps = {
 export function AppProvider({ children }: AppProviderProps) {
 	const value = useState({});
 	return (
-		<AppStateContext.Provider value={value}>
+		<FormStateContext.Provider value={value}>
 			{children}
-		</AppStateContext.Provider>
+		</FormStateContext.Provider>
 	);
 }
 
 export function useAppState() {
-	const context = useContext(AppStateContext);
+	const context = useContext(FormStateContext);
 	if (!context) {
 		throw new Error("useAppState must be used within the AppProvider");
 	}
