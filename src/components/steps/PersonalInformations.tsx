@@ -1,76 +1,135 @@
-import { Link } from "react-router-dom";
 import { FormWrapper } from "../FormWrapper";
 import TextField from "@mui/material/TextField";
 import Grid from "@mui/material/Unstable_Grid2";
-import { Button } from "@mui/material";
+import { Button, Stack } from "@mui/material";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import { useForm } from "react-hook-form";
+import { FormValues, useAppState } from "../Context";
+import { DevTool } from "@hookform/devtools";
+import { useNavigate } from "react-router-dom";
+import { FormStateContext } from "../../App";
+import { useContext } from "react";
 
 export function PersonalInformations() {
-	const { register } = useForm()
 
+
+	const { register, control, handleSubmit, formState } = useForm<FormValues>();
+	const { errors } = formState;
+
+	const navigate = useNavigate();
+
+	const onSubmit = (data: FormValues) => {
+		console.log(data);
+		// setFormData((prevData) => ({
+		// 	...prevData,
+		// }))
+		navigate("/form/history");
+	};
 
 	return (
-		<FormWrapper>
-
-			<Grid container rowSpacing={4} columnSpacing={2}>
-				<Grid md={6} xs={12}>
-					<TextField sx={{ width: "100%" }} label="Nome" variant="filled" />
-				</Grid>
-				<Grid md={6} xs={12}>
-					<TextField sx={{ width: "100%" }} label="Cognome" variant="filled" />
-				</Grid>
-				<Grid md={6} xs={12}>
-					<TextField
-						sx={{ width: "100%" }}
-						label="Indirizzo"
-						variant="filled"
-						/>
-				</Grid>
-				<Grid md={6} xs={12}>
-					<TextField
-						sx={{ width: "100%" }}
-						label="Codice postale"
-						variant="filled"
-						/>
-				</Grid>
-				<Grid md={6} xs={12}>
-					<TextField
-						sx={{ width: "100%" }}
-						label="Città/Capoluogo"
-						variant="filled"
-						/>
-				</Grid>
-				<Grid md={6} xs={12}>
-					<TextField
-						sx={{ width: "100%" }}
-						label="Numero telefonico"
-						variant="filled"
-						/>
-				</Grid>
-				<Grid xs={12}>
-					<TextField sx={{ width: "100%" }} label="Sito Web" variant="filled" />
-				</Grid>
-				<Grid xs={12}>
-					<TextField sx={{ width: "100%" }} label="Email" variant="filled" />
-				</Grid>
-				<Grid display={"flex"} justifyContent={"center"} xs={12}>
-					<Button
-						sx={{
-							width: "80%",
-							bgcolor: "#5846FB",
-							borderRadius: "2rem",
-							marginTop: "1rem",
-						}}
-						component={Link}
-						to="/form/history"
-						variant="contained"
-						endIcon={<ArrowForwardIcon />}
-						>
-						next
-					</Button>
-				</Grid>
-			</Grid>
-	</FormWrapper>
+		<Stack
+			sx={{
+				height: "100%",
+				display: "flex",
+				alignItems: "center",
+				justifyContent: "center",
+				flexDirection: "column",
+			}}
+		>
+			<FormWrapper>
+				<form noValidate onSubmit={handleSubmit(onSubmit)}>
+					<Grid container rowSpacing={4} columnSpacing={2}>
+						<Grid md={6} xs={12}>
+							<TextField
+								{...register("name", {
+									required: "Nome richiesto",
+								})}
+								sx={{ width: "100%" }}
+								label="Nome"
+								variant="filled"
+								error={!!errors.name?.message}
+								helperText={errors.name?.message}
+							/>
+						</Grid>
+						<Grid md={6} xs={12}>
+							<TextField
+								sx={{ width: "100%" }}
+								label="Cognome"
+								variant="filled"
+								{...register("surname", {
+									required: "Cognome richiesto",
+								})}
+								error={!!errors.surname?.message}
+								helperText={errors.surname?.message}
+							/>
+						</Grid>
+						<Grid md={6} xs={12}>
+							<TextField
+								sx={{ width: "100%" }}
+								label="Indirizzo"
+								variant="filled"
+								{...register("address")}
+							/>
+						</Grid>
+						<Grid md={6} xs={12}>
+							<TextField
+								sx={{ width: "100%" }}
+								label="Codice postale"
+								variant="filled"
+								{...register("postalCode")}
+							/>
+						</Grid>
+						<Grid md={6} xs={12}>
+							<TextField
+								sx={{ width: "100%" }}
+								label="Città/Capoluogo"
+								variant="filled"
+								{...register("position")}
+							/>
+						</Grid>
+						<Grid md={6} xs={12}>
+							<TextField
+								sx={{ width: "100%" }}
+								label="Numero telefonico"
+								variant="filled"
+								{...register("phoneNumber")}
+							/>
+						</Grid>
+						<Grid xs={12}>
+							<TextField
+								sx={{ width: "100%" }}
+								label="Sito Web"
+								variant="filled"
+								{...register("website")}
+							/>
+						</Grid>
+						<Grid xs={12}>
+							<TextField
+								sx={{ width: "100%" }}
+								label="Email"
+								variant="filled"
+								{...register("email")}
+							/>
+						</Grid>
+						<Grid display={"flex"} justifyContent={"center"} xs={12}>
+							<Button
+								sx={{
+									width: "80%",
+									bgcolor: "#5846FB",
+									borderRadius: "2rem",
+									marginTop: "1rem",
+								}}
+								type="submit"
+								variant="contained"
+								endIcon={<ArrowForwardIcon />}
+							>
+								next
+							</Button>
+						</Grid>
+					</Grid>
+				</form>
+				<DevTool control={control} />
+			</FormWrapper>
+		</Stack>
 	);
 }

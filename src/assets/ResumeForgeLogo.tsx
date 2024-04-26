@@ -1,6 +1,5 @@
-import type { SVGProps } from "react";
-import SvgIcon from "@mui/material/SvgIcon";
-export default function ResumeForgeLogo(props: SVGProps<SVGSVGElement>) {
+import SvgIcon, { SvgIconProps } from "@mui/material/SvgIcon";
+export default function ResumeForgeLogo(props: SvgIconProps) {
 	return (
 		<SvgIcon>
 			<svg

@@ -16,9 +16,11 @@ export function FormWrapper({
 		<Container
 			maxWidth={maxWidth}
 			sx={{
+				margin: "3rem",
 				padding: "3rem",
 				borderRadius: "4rem",
 				boxShadow: "-10px 11px 0px 4px #9593FA",
+				bgcolor: "white",
 				...sx,
 			}}
 		>
