@@ -15,10 +15,10 @@ const theme = createTheme({
 	},
 });
 
-export const FormStateContext = createContext({});
+export const FormStateContext = createContext(defaultFormData);
 
 function App() {
-	const [formData, setFormData] = useState(defaultFormData);
+	const [formData, setFormData] = useState({});
 
 	return (
 		<ThemeProvider theme={theme}>

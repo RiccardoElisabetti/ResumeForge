@@ -11,7 +11,7 @@ import { FormStateContext } from "../../App";
 import { useContext } from "react";
 
 export function PersonalInformations() {
-
+	const {formData, setFormData } = useContext(FormStateContext)
 
 	const { register, control, handleSubmit, formState } = useForm<FormValues>();
 	const { errors } = formState;
