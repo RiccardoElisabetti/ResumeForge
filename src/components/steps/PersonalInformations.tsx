@@ -4,25 +4,23 @@ import Grid from "@mui/material/Unstable_Grid2";
 import { Button, Stack } from "@mui/material";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import { useForm } from "react-hook-form";
-import { FormValues, useAppState } from "../Context";
+import { FormType, useFormContext } from "../Context";
 import { DevTool } from "@hookform/devtools";
 import { useNavigate } from "react-router-dom";
-import { FormStateContext } from "../../App";
-import { useContext } from "react";
+
 
 export function PersonalInformations() {
-	const {formData, setFormData } = useContext(FormStateContext)
+	const { formContextValues, setFormContextValues } = useFormContext();
 
-	const { register, control, handleSubmit, formState } = useForm<FormValues>();
+	const { register, control, handleSubmit, formState } = useForm<FormType>({
+		defaultValues: formContextValues
+	});
 	const { errors } = formState;
 
 	const navigate = useNavigate();
 
-	const onSubmit = (data: FormValues) => {
-		console.log(data);
-		// setFormData((prevData) => ({
-		// 	...prevData,
-		// }))
+	const onSubmit = (data: FormType) => {
+		setFormContextValues(data)
 		navigate("/form/history");
 	};
 

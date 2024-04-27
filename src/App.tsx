@@ -5,9 +5,9 @@ import { EmploymentHistory } from "./components/steps/EmploymentHistory";
 import { Summary } from "./components/steps/Summary";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Box } from "@mui/material";
-import { AppProvider } from "./components/Context";
-import { createContext, useState } from "react";
-import { defaultFormData } from "./components/Context";
+import { useState } from "react";
+import { defaultFormValues} from "./components/Context";
+import { FormContext} from "./components/Context";
 
 const theme = createTheme({
 	typography: {
@@ -15,14 +15,13 @@ const theme = createTheme({
 	},
 });
 
-export const FormStateContext = createContext(defaultFormData);
 
 function App() {
-	const [formData, setFormData] = useState({});
+	const [formContextValues, setFormContextValues] = useState(defaultFormValues)
 
 	return (
 		<ThemeProvider theme={theme}>
-			<FormStateContext.Provider value={{ formData, setFormData }}>
+			<FormContext.Provider value={{formContextValues, setFormContextValues}}>
 				<Box
 					sx={{
 						height: "100svh",
@@ -48,7 +47,7 @@ function App() {
 						<Route path="/form/summary" element={<Summary />} />
 					</Routes>
 				</Box>
-			</FormStateContext.Provider>
+			</FormContext.Provider>
 		</ThemeProvider>
 	);
 }

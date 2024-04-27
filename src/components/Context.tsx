@@ -1,17 +1,16 @@
 import { createContext, ReactNode, useContext, useState } from "react";
 
-
 type ExperienceValues = {
 	title: string;
 	employmentType:
-	| "Tempo pieno"
-	| "Part time"
-	| "Lavoratore autonomo"
-	| "Libero professionista"
-	| "Contratto"
-	| "Tirocinio"
-	| "Apprendistato"
-	| null;
+		| "Tempo pieno"
+		| "Part time"
+		| "Lavoratore autonomo"
+		| "Libero professionista"
+		| "Contratto"
+		| "Tirocinio"
+		| "Apprendistato"
+		| null;
 	company: string;
 	location: string;
 	startDate: Date | null;
@@ -24,7 +23,7 @@ type SkillValues = {
 	level: "Nessuno" | "Principiante" | "Capace" | "Esperto" | null;
 };
 
-export type FormValues = {
+export type FormType = {
 	name: string;
 	surname: string;
 	address: string;
@@ -37,7 +36,7 @@ export type FormValues = {
 	experiences: ExperienceValues[];
 };
 
-export const defaultFormData: FormValues = {
+export const defaultFormValues: FormType = {
 	name: "",
 	surname: "",
 	address: "",
@@ -52,35 +51,43 @@ export const defaultFormData: FormValues = {
 			level: null,
 		},
 	],
-	experiences: [{
-		title: "",
-		employmentType: null,
-		company: "",
-		location: "",
-		startDate: null,
-		endDate: null,
-		description: ""
-	}],
+	experiences: [
+		{
+			title: "",
+			employmentType: null,
+			company: "",
+			location: "",
+			startDate: null,
+			endDate: null,
+			description: "",
+		},
+	],
 };
 
-type AppProviderProps = {
-	children: ReactNode;
+type ContextValue = {
+	formContextValues: FormType;
+	setFormContextValues: React.Dispatch<React.SetStateAction<FormType>>;
 };
 
-export const FormStateContext = createContext({});
-export function AppProvider({ children }: AppProviderProps) {
-	const [formData, setFormData] = useState(defaultFormData);
-	return (
-		<FormStateContext.Provider value={[formData, setFormData]}>
-			{children}
-		</FormStateContext.Provider>
-	);
-}
+// type AppProviderProps = {
+// 	children: ReactNode;
+// };
 
-export function useAppState() {
-	const context = useContext(FormStateContext);
-	if (!context) {
+// export function Provider({ children }: AppProviderProps) {
+// 	const [formData, setFormData] = useState(defaultFormData);
+// 	return (
+// 		<FormStateContext.Provider value={[formData, setFormData]}>
+// 			{children}
+// 		</FormStateContext.Provider>
+// 	);
+// }
+
+export const FormContext = createContext<null | ContextValue>(null);
+
+export function useFormContext() {
+	const FormContextValue = useContext(FormContext);
+	if (!FormContextValue) {
 		throw new Error("useAppState must be used within the AppProvider");
 	}
-	return context;
+	return FormContextValue;
 }
