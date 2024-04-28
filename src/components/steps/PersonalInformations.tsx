@@ -7,20 +7,22 @@ import { useForm } from "react-hook-form";
 import { FormType, useFormContext } from "../Context";
 import { DevTool } from "@hookform/devtools";
 import { useNavigate } from "react-router-dom";
-
+import Stepper from "@mui/material/Stepper";
+import Step from "@mui/material/Step";
+import StepLabel from "@mui/material/StepLabel";
 
 export function PersonalInformations() {
 	const { formContextValues, setFormContextValues } = useFormContext();
 
 	const { register, control, handleSubmit, formState } = useForm<FormType>({
-		defaultValues: formContextValues
+		defaultValues: formContextValues,
 	});
+
 	const { errors } = formState;
 
 	const navigate = useNavigate();
-
 	const onSubmit = (data: FormType) => {
-		setFormContextValues(data)
+		setFormContextValues(data);
 		navigate("/form/history");
 	};
 
@@ -34,6 +36,17 @@ export function PersonalInformations() {
 				flexDirection: "column",
 			}}
 		>
+			<Stepper activeStep={0} alternativeLabel>
+				<Step>
+					<StepLabel> prova </StepLabel>
+				</Step>
+				<Step>
+					<StepLabel> prova </StepLabel>
+				</Step>
+				<Step>
+					<StepLabel> prova </StepLabel>
+				</Step>
+			</Stepper>
 			<FormWrapper>
 				<form noValidate onSubmit={handleSubmit(onSubmit)}>
 					<Grid container rowSpacing={4} columnSpacing={2}>

@@ -6,13 +6,36 @@ import {
 	InputLabel,
 	MenuItem,
 	Select,
+	SelectChangeEvent,
 	TextField,
 	Typography,
 } from "@mui/material";
 import Grid from "@mui/material/Unstable_Grid2";
 import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
+import {
+	Control,
+	FieldArrayWithId,
+	FieldErrors,
+	UseFormRegister,
+} from "react-hook-form";
+import { FormType } from "./Context";
+import { useState } from "react";
 
-export function Skill() {
+export function Skill({
+	register,
+	field,
+	index,
+}: {
+	register: UseFormRegister<FormType>;
+	field: FieldArrayWithId<FormType, "skills", "id">;
+	index: number;
+}) {
+	const [skillLevel, setSkillLevel] = useState("");
+
+	const handleChange = (event: SelectChangeEvent) => {
+		setSkillLevel(event.target.value as string);
+	};
+
 	return (
 		<Accordion
 			square
@@ -20,15 +43,18 @@ export function Skill() {
 				width: "100%",
 				border: "3px solid #9593FA",
 				borderRadius: "1.5rem",
+				marginTop: "1rem",
 			}}
+			key={field.id}
 		>
 			<AccordionSummary expandIcon={<ArrowDownwardIcon />}>
-				<Typography fontWeight={600}>Abilità</Typography>
+				<Typography fontWeight={600}>Abilità {index + 1}</Typography>
 			</AccordionSummary>
 			<AccordionDetails>
-				<Grid container spacing={4} padding={.5}>
+				<Grid container spacing={4} padding={0.5}>
 					<Grid xs={12} sm={6}>
 						<TextField
+							{...register(`skills.${index}.skill` as const)}
 							label="Competenza"
 							sx={{ width: "100%" }}
 							variant="filled"
@@ -38,10 +64,12 @@ export function Skill() {
 						<FormControl fullWidth variant="filled">
 							<InputLabel id="select-label">Livello</InputLabel>
 							<Select
+								{...register(`skills.${index}.level` as const)}
 								variant="filled"
 								autoWidth
 								labelId="select-label"
-								value={""}
+								value={skillLevel}
+								onChange={handleChange}
 							>
 								<MenuItem value="Nessuno">Nessuno</MenuItem>
 								<MenuItem value="Principiante">Principiante</MenuItem>
@@ -53,14 +81,5 @@ export function Skill() {
 				</Grid>
 			</AccordionDetails>
 		</Accordion>
-
-		// <fieldset>
-		// 	<legend>Competenza</legend>
-		// 	<label htmlFor="compentenza">Competenza:</label>
-		// 	<input type="text" id="compentenza" name="competenza" required />
-		// 	<label htmlFor="livello">Livello:</label>
-		// 	<input type="text" id="livello" name="livello" required />
-		// 	<button>+ Aggiungi nuova esperienza</button>
-		// </fieldset>
 	);
 }

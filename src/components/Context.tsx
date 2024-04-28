@@ -69,6 +69,17 @@ type ContextValue = {
 	setFormContextValues: React.Dispatch<React.SetStateAction<FormType>>;
 };
 
+
+export const FormContext = createContext<null | ContextValue>(null);
+
+export function useFormContext() {
+	const FormContextValue = useContext(FormContext);
+	if (!FormContextValue) {
+		throw new Error("useAppState must be used within the AppProvider");
+	}
+	return FormContextValue;
+}
+
 // type AppProviderProps = {
 // 	children: ReactNode;
 // };
@@ -81,13 +92,3 @@ type ContextValue = {
 // 		</FormStateContext.Provider>
 // 	);
 // }
-
-export const FormContext = createContext<null | ContextValue>(null);
-
-export function useFormContext() {
-	const FormContextValue = useContext(FormContext);
-	if (!FormContextValue) {
-		throw new Error("useAppState must be used within the AppProvider");
-	}
-	return FormContextValue;
-}
