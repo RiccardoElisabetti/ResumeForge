@@ -24,7 +24,7 @@ export const FormDatePicker = ({ name, control, label }: FormInputProps) => {
 						label={label}
 						value={value}
 						format="DD/MM/YYYY"
-						onChange={onChange}
+                        onChange={onChange}
 					/>
 				)}
 			/>

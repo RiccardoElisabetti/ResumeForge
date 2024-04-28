@@ -3,7 +3,11 @@ import { Experience } from "../ExperienceSection";
 import { Skill } from "../SkillSection";
 import { FormWrapper } from "../FormWrapper";
 import Stack from "@mui/material/Stack";
-import { Button, Typography } from "@mui/material";
+import {
+	Button,
+	Experimental_CssVarsProvider,
+	Typography,
+} from "@mui/material";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import AddIcon from "@mui/icons-material/Add";
@@ -143,7 +147,7 @@ export function EmploymentHistory() {
 								onClick={() =>
 									skills.append({
 										skill: "",
-										level: null
+										level: null,
 									})
 								}
 							>

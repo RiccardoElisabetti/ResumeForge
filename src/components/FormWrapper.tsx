@@ -1,4 +1,4 @@
-import { Breakpoint, Container, SxProps } from "@mui/material";
+import { Breakpoint, Container, Paper, SxProps } from "@mui/material";
 import { ReactNode } from "react";
 
 type FormWrapperProps = {
@@ -14,12 +14,15 @@ export function FormWrapper({
 }: FormWrapperProps) {
 	return (
 		<Container
+			component={Paper}
+			elevation={24}
 			maxWidth={maxWidth}
 			sx={{
 				margin: "3rem",
 				padding: "3rem",
 				borderRadius: "4rem",
-				boxShadow: "-10px 11px 0px 4px #9593FA",
+				boxShadow: (theme) =>
+					`${theme.shadows[24]}, -10px 11px 0px 4px #9593FA`,
 				bgcolor: "white",
 				...sx,
 			}}

@@ -3,10 +3,7 @@ import AccordionDetails from "@mui/material/AccordionDetails";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
 import Grid from "@mui/material/Unstable_Grid2";
-import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import TextField from "@mui/material/TextField";
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import {
 	FormControl,
 	InputLabel,
@@ -17,10 +14,8 @@ import {
 } from "@mui/material";
 import {
 	Control,
-	Controller,
 	FieldArrayWithId,
 	FieldErrors,
-	useForm,
 	UseFormRegister,
 } from "react-hook-form";
 import { FormType } from "./Context";
@@ -31,7 +26,6 @@ export function Experience({
 	register,
 	field,
 	index,
-	errors,
 	control,
 }: {
 	register: UseFormRegister<FormType>;
@@ -118,22 +112,17 @@ export function Experience({
 					</Grid>
 					<Grid xs={12} sm={6}>
 						<FormDatePicker
-							name={`experiences.${index}.startDate`}
-							control={control}
 							label={"Data di inizio impiego"}
+							control={control}
+							name={`experiences.${index}.startDate`}
 						/>
 					</Grid>
 					<Grid xs={12} sm={6}>
-						<LocalizationProvider dateAdapter={AdapterDayjs}>
-							<DatePicker
-								sx={{ width: "100%" }}
-								label={"Data di fine impiego"}
-								slotProps={{
-									field: { clearable: true },
-									...register(`experiences.${index}.endDate` as const),
-								}}
-							/>
-						</LocalizationProvider>
+						<FormDatePicker
+							label={"Data di inizio impiego"}
+							control={control}
+							name={`experiences.${index}.endDate`}
+						/>
 					</Grid>
 					<Grid xs={12}>
 						<TextField
