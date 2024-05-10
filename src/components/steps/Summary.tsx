@@ -1,7 +1,15 @@
 import { FormWrapper } from "../FormWrapper";
-import { Stack } from "@mui/material";
-import { PDFViewer } from "@react-pdf/renderer";
+import {
+	Button,
+	Checkbox,
+	FormControlLabel,
+	FormGroup,
+	Stack,
+	Typography,
+} from "@mui/material";
+import { PDFViewer, PDFDownloadLink } from "@react-pdf/renderer";
 import { Resume } from "../Resume";
+import DownloadRoundedIcon from "@mui/icons-material/DownloadRounded";
 export function Summary() {
 	return (
 		<Stack
@@ -13,13 +21,21 @@ export function Summary() {
 		>
 			<FormWrapper
 				sx={{
-					height: "80%",
+					height: "fit-content",
 					marginRight: "0",
-					paddingRight: "0",
-					// bgcolor: "blue",
+					padding: "2rem",
+					borderRadius: "1rem",
 				}}
 			>
-				<PDFViewer showToolbar={false} height="100%" width="100%">
+				<PDFViewer
+					showToolbar={false}
+					style={{
+						width: "100%",
+						aspectRatio: "3/4",
+						margin: "0",
+						padding: "0",
+					}}
+				>
 					<Resume />
 				</PDFViewer>
 			</FormWrapper>
@@ -27,26 +43,70 @@ export function Summary() {
 				sx={{
 					marginLeft: "0",
 					paddingLeft: "0",
+					borderRadius: "2rem",
 					boxShadow: "10px 11px 0px 4px #9593FA",
 					zIndex: -1,
 				}}
 			>
-				<h1>hello</h1>
+				<Stack
+					direction={"column"}
+					justifyContent={"center"}
+					alignItems={"center"}
+				>
+					<Typography fontSize={"3rem"} fontWeight={500}>
+						Riepilogo
+					</Typography>
+					<FormGroup>
+						<FormControlLabel
+							disabled
+							control={<Checkbox />}
+							label="Nascondi immagine profilo"
+						/>
+						<FormControlLabel
+							control={<Checkbox />}
+							label="Nascondi nome e cognome"
+						/>
+						<FormControlLabel
+							control={<Checkbox />}
+							label="Nascondi numero di telefono"
+						/>
+					</FormGroup>
+					<Stack
+						direction={"row"}
+						justifyContent={"space-around"}
+						alignItems={"center"}
+						spacing={20}
+					>
+						<PDFDownloadLink document={<Resume />} fileName="resume.pdf">
+							<Button
+								sx={{
+									width: "80%",
+									bgcolor: "#5846FB",
+									borderRadius: "2rem",
+									marginTop: "1rem",
+								}}
+								variant="contained"
+								endIcon={<DownloadRoundedIcon />}
+							>
+								Scarica
+							</Button>
+						</PDFDownloadLink>
+						<Button
+							sx={{
+								width: "80%",
+								bgcolor: "#5846FB",
+								borderRadius: "2rem",
+								marginTop: "1rem",
+							}}
+							variant="contained"
+							disabled
+							endIcon={<DownloadRoundedIcon />}
+						>
+							Salva
+						</Button>
+					</Stack>
+				</Stack>
 			</FormWrapper>
 		</Stack>
-		// <fieldset>
-		// 	<legend>Summary</legend>
-		// 	<p>Here's a summary of your information:</p>
-		// 	{/* Display data from previous forms (implementation depends on your state management) */}
-		// 	<ul>
-		// 		<li>Name: {/* Display retrieved name */}</li>
-		// 		<li>Email: {/* Display retrieved email */}</li>
-		// 		{/* ... and so on for other fields */}
-		// 	</ul>
-		// 	{/* Optionally, provide a button for form submission */}
-		// 	<button style={{ display: "block" }}>
-		// 		<Link to="/form/history">back</Link>
-		// 	</button>
-		// </fieldset>
 	);
 }

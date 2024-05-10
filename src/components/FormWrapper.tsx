@@ -14,8 +14,10 @@ export function FormWrapper({
 }: FormWrapperProps) {
 	return (
 		<Container
+			disableGutters
 			component={Paper}
 			elevation={24}
+			square
 			maxWidth={maxWidth}
 			sx={{
 				margin: "3rem",

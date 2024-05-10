@@ -36,7 +36,7 @@ export function PersonalInformations() {
 				flexDirection: "column",
 			}}
 		>
-			<Stepper activeStep={0} alternativeLabel>
+			{/* <Stepper activeStep={0} alternativeLabel>
 				<Step>
 					<StepLabel> prova </StepLabel>
 				</Step>
@@ -46,7 +46,7 @@ export function PersonalInformations() {
 				<Step>
 					<StepLabel> prova </StepLabel>
 				</Step>
-			</Stepper>
+			</Stepper> */}
 			<FormWrapper>
 				<form noValidate onSubmit={handleSubmit(onSubmit)}>
 					<Grid container rowSpacing={4} columnSpacing={2}>
